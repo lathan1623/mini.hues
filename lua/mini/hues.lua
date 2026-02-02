@@ -469,7 +469,9 @@ MiniHues.apply_palette = function(palette, plugins, opts)
   local p, autoadjust = palette, opts.autoadjust
   local hi = function(name, data) 
     local filtered_data = vim.deepcopy(data)
-    filtered_data.bg = nil
+    if filtered_data.bg == p.bg then
+      filtered_data.bg = nil
+    end
     vim.api.nvim_set_hl(0, name, filtered_data) 
   end
   local has_integration = function(name)
